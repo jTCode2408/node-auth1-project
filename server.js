@@ -4,7 +4,7 @@ const server = express()
 const Router = require ('./API/router')
 
 
-
+server.use(express.json())
 server.use('/api', Router);
 server.get('/', (req, res) => {
     res.send(`SERVER START POINT`)
