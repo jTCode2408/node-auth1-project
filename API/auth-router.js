@@ -26,12 +26,12 @@ router.post('/register', (req, res) => {
 
 
 router.post('/login', (req, res) => {
-    let { username, password} = req.body
+    let { username, password } = req.body
     Users.findBy({username})
         .first()
         .then(user => {
             if (user && crypt.compareSync(password, user.password)) { 
-                res.status(200).json({LoggedIn: `Logged In under User ID:${user.req.params.id} `})
+                res.status(200).json({LoggedIn: `ID: ${user.id}, Username:${user.username}, HashedPass: ${user.password}`})
             } else {
                res.status(401).json({error:"You shall not pass!"}) 
             }
