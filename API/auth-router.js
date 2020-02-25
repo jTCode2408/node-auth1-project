@@ -11,7 +11,6 @@ router.post('/register', (req, res) => {
     console.log(user)
     const hash = crypt.hashSync(user.password, 8)
     user.password = hash
-    
     Users.add(user)
         .then(adding => {
             res.status(201).json(adding)
@@ -23,17 +22,19 @@ router.post('/register', (req, res) => {
 
 })
 
-
-
 router.post('/login', (req, res) => {
     let { username, password } = req.body
     Users.findBy({username})
         .first()
         .then(user => {
             if (user && crypt.compareSync(password, user.password)) { 
+                //add cookie on login
+                req.session.loggedIn = true;
+                req.session.user = user.user
+
                 res.status(200).json({LoggedIn: `ID: ${user.id}, Username:${user.username}, HashedPass: ${user.password}`})
             } else {
-               res.status(401).json({error:"You shall not pass!"}) 
+               res.status(401).json({error:"invalid credentials"}) 
             }
         })
         .catch(err => {
@@ -42,6 +43,9 @@ router.post('/login', (req, res) => {
         })
     
 })
+
+
+//logout route
 
 
 
