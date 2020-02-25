@@ -7,7 +7,6 @@ const db = require('./data/dbConfig');
 
 const server = express();
 
-
 const sessionConfig = {
     name: "mamba",
     secret: "secret secret",
@@ -34,14 +33,9 @@ server.use(express.json())
 server.use('/api', Router);
 
 
-
-
-
 server.get('/', (req, res) => {
     res.send(`SERVER START POINT`)
 })
-
-
 
 
 module.exports = server

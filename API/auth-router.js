@@ -5,7 +5,6 @@ const crypt = require('bcryptjs');
 
 const Users = require('../data/user-model');
 
-
 router.post('/register', (req, res) => {
     let user = req.body;
     console.log(user)
@@ -44,8 +43,7 @@ router.post('/login', (req, res) => {
     
 })
 
-
-//logout route
+// add logout route
 router.get('/logout', (req, res) => {
     if (req.session) {
         req.session.destroy(err => {

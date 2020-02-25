@@ -1,4 +1,4 @@
-//user routes hereconst router = require('express').Router();
+
 const router = require('express').Router();
 const Users = require('../data/user-model');
 
